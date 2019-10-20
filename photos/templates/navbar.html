@@ -6,10 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-    <nav class="navbar navbar-inverse">
+    <nav class="navbar navbar">
         <div class="container-fluid">
           <div class="navbar-header">
-            <a class="navbar-brand" href="{% url 'newsToday' %}">The Moringa Tribune</a>
+            <a class="navbar-brand" href="{% url 'newsToday' %}">INSTAGRAM</a>
           </div>
     
           <!-- Adding a search form  -->
@@ -32,7 +32,7 @@
     <div class="col-sm-6 col-md-6">
             {% if user.is_authenticated %}
             <ul>
-              <li class="dropdown">
+              <!-- <li class="dropdown">
                 <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button" aria-expanded="false">Account
                           <span class="caret"></span>
                       </a>
@@ -40,15 +40,15 @@
                   <li>
                     <a href="{%url 'newsToday'%}">Home</a>
                   </li>
-                  <li>
-                    <a href="{%url 'new-article'%}">Create Article</a>
+                  <li> -->
+                    <a href="{%url 'new-article'%}">Upload </a>
                   </li>
-                  <li>
+                  <!-- <li>
                     <a href="/accounts/password/change">Change Password</a>
                   </li>
                   <li>
                     <a href="/logout">Logout</a>
-                  </li>
+                  </li> -->
                 </ul>
               </li>
             </ul>

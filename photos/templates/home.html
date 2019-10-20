@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% block content %} 
+{{ block.super}}
+
+
+<div class="container">
+    
+
+  {% for news_item in images %}
+  <div class="row">
+  
+    <div class="col-sm-3"></div>
+  
+   
+      <div class="col-sm-6">
+        <img src="{{news_item.image.url}} " style="margin-bottom:20px;"class="img-responsive"  with="200" alt="Image">
+        <!-- alt="{{image.user.user.username}}" width="30" height="30"> -->
+      </div>
+      <div class="card-title">
+          <img src="{{news_item.user.image.url}}" class="rounded-circle border"
+              alt="{{news_item.user.user.username}}" width="30" height="30">
+        
+              <strong style="color: #333333;cursor: pointer">{{news_item.user.user.username}}</strong>
+          </a>
+      </div>
+    </div>
+
+  {% endfor %}
+
+</div>
+
+
+
+
+
+{% endblock %}

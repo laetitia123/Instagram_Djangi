@@ -34,7 +34,7 @@ SECRET_KEY = 'bj^672htnd4k1x&+692ta=r2e7#p$wjr*ma-#5rq1-(w_d_l^o'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-TIME_ZONE = 'Africa/Nairobi'
+TIME_ZONE = 'Africa/Kigali'
 
 # Application definition
 

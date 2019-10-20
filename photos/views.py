@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 
 from django.http import HttpResponse, Http404,HttpResponseRedirect
 import datetime as dt
-from .models import Article,NewsLetterRecipients
+from .models import *
 # from .forms import NewsLetterForm
 from .email import send_welcome_email
 from django.contrib.auth.decorators import login_required
@@ -15,7 +15,7 @@ def profile(request):
     return render(request, 'profile.html', {"profile":profile})
 def news_today(request):
     date = dt.date.today()
-    news = Article.todays_news()
+    images= Image.todays_news()
     # return render(request, 'all-news/today-news.html', {"date": date,"news":news})
     if request.method == 'POST':
         form = NewsLetterForm(request.POST)
@@ -30,24 +30,8 @@ def news_today(request):
 # After validating a form instance the values of the form are saved inside cleaned_data property which is a dictionary
     else:
         form = NewsLetterForm()
-    return render(request, 'all-news/today-news.html', {"date": date,"news":news,"letterForm":form})
+    return render(request, 'home.html', {"date": date,"images":images,"letterForm":form})
 
-
-def past_days_news(request, past_date):
-
-    try:
-        # Converts data from the string Url
-        date = dt.datetime.strptime(past_date, '%Y-%m-%d').date()
-    except ValueError:
-        # Raise 404 error when ValueError is thrown
-        raise Http404()
-        assert False
-
-    if date == dt.date.today():
-        return redirect(news_today)
-
-    news = Article.days_news(date)
-    return render(request, 'all-news/past-news.html',{"date": date,"news":news})
 def search_results(request):
 
     if 'article' in request.GET and request.GET["article"]:
