@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% block content %} 
+{{ block.super}}
+
+
+<div class="container">
+    <!-- welcome to -->
+
+
+  <a href="{%  url 'edit' %}">
+                    <button class="editbtn">
+                        <span class="edittext">Edit Profile</span>
+                    </button>
+                </a>
+  <div style="margin-bottom: 11px;">
+    <img src="{{user_object.profile.profile_picture.url}}" width="152" height="152"
+                class="rounded-circle border userimage">
+    <span class="info"><strong>{{ user_object.profile.images.count }}</strong> posts</span>
+    <span class="info"><strong>{{ user_object.profile.followers.count }}</strong> followers</span>
+    <span class="info"><strong>{{ user_object.profile.following.count }}</strong> following</span>
+
+</div>
+  
+</div>
+
+
+
+
+
+{% endblock %}

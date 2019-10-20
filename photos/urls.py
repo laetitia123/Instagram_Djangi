@@ -10,7 +10,9 @@ urlpatterns=[
     url(r'^search/', views.search_results, name='search_results'),
     url(r'^article/(\d+)',views.article,name ='article'),
     url(r'^new/article$', views.new_article, name='new-article'),
-    url(r'^login/$', views.profile, name='profile')
+    url(r'^login/$', views.profile, name='profile'),
+    url(r'myaccount/', views.mine, name='myaccount'),
+    url(r'edit/', views.edit, name='edit'),
     
 ]
 if settings.DEBUG:

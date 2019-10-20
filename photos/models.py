@@ -79,4 +79,6 @@ class Profile(models.Model):
 
     @property
     def follows(self):
-        return [follow.followee for follow in self.following.all()]
+        return [follow.followee for follow in self.following.all()] 
+    def __str__(self):
+        return self.user.username
