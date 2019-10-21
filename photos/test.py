@@ -31,14 +31,14 @@ class ImageTestClass(TestCase):
         self.assertEqual(len(images),1)
    
 class Profiletest(TestCase):
-    # numusers = 10
+   
 
-    # def setUp(self):
-    #     self.tempprofiles = []
-    #     for i in range(self.numusers):
-    #         tmp = Profile()
-    #         tmp.save()
-    #         self.tempprofiles.append(tmp)
+    def setUp(self):
+        self.tempprofiles = []
+        for i in range(self.numusers):
+            tmp = Profile()
+            tmp.save()
+            self.tempprofiles.append(tmp)
 
     # def test_follow(self):
     #     follower = Profile()
