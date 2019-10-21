@@ -1,36 +1,41 @@
-
-{% load static %}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link href="https://fonts.googleapis.com/css?family=Archivo+Narrow|Charmonman|Kodchasan|Dancing+Script|Spirax" rel="stylesheet">
-
-<nav class="navbar bg-light " style="color: black;">
- <div class="container-fluid" style="margin-left: 20%;">
-   <div class="navbar-header">
-       <a class="navbar-brand" href="{% url 'newsToday' %}" style="font-size:28px;color:black;font-family: 'Grand Hotel', cursive;">
-      <i class="fa fa-instagram" ></i> |  Instagram</a>
-   </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Archivo+Narrow|Charmonman|Kodchasan|Dancing+Script|Spirax" rel="stylesheet">
+  
+</head>
+<body>
   
 
-<!-- 
-    Adding a search form  -->
-   <div class="col-sm-4 col-md-4 navbar-right" >
 
-     <form class="navbar-form" role="search" action="{% url 'search_results' %}" >
+<nav class="navbar bg-light " style="color: black;border-bottom:1px solid #eeee;">
+ <div class="container-fluid" style="margin-left:50px;">
+  <div class="row">
+   <div class="navbar-header">
+       <a class="navbar-brand" href="{% url 'newsToday' %}" style="font-size:28px;color:black;font-family: 'Lobster Two', cursive;">
+      <i class="fa fa-instagram" ></i> |  Instagram</a>
+      <div class="col-sm-6 navbar-right" >
 
-       <div class="input-group">
-         <input type="text" class="form-control mr-sm-4" placeholder="Search User" name="username">
-         <div class="input-group-btn">
-           <button class="btn btn-outline-info my-2 my-sm-0" type="submit"  style="color: black;"><i class="fa fa-search"></i></button>
+          <form class="navbar-form" role="search" action="{% url 'search_results' %}" >
+     
+            <div class="input-group">
+              <input type="text" class="form-control mr-sm-4" placeholder="Search User" name="username" style="width:300px;">
+              <div class="input-group-btn">
+                <button class="btn btn-outline-info my-2 my-sm-0" type="submit"  style="color: black;"><i class="fa fa-search"></i></button>
+              </div>
+            </div>
+     
+          </form>
          </div>
-       </div>
-
-     </form>
-     <i class="far fa-heart"></i>
-   </div>
-   <!-- search form end -->
+    </div>
 
 
- <div class="col-sm-6 col-md-6"  style="color: black;">
+
+ <div class="col-sm-4"  style="color: black; margin-left:900px;padding-bottom:30px;margin-top:-30px;">
      <a><i class="fa fa-compass" style="color: black;"></i></a>
      <a><i class="fa fa-heart-o" style="color: black;"></i></a>
      <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-user-o" style="color: black;"></i>
@@ -51,8 +56,10 @@
          <a href="/logout">Logout</a>
        </li>
      </ul>
-  
- </div>
+    </div>
+  </div>
 
 </div>
 </nav> 
+</body>
+</html>

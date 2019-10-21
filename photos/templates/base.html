@@ -13,15 +13,16 @@
 
   {% block styles %}
     {% bootstrap_css %}
+    {% include "navbar.html" %}
     <link rel="stylesheet" href="{% static 'css/basenews.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Lobster+Two&display=swap" rel="stylesheet"> 
   {% endblock %}
 
 </head>
-<body>
-    {% include "navbar.html" %}
+<body >
+   
 
     {% block content %} 
-   
 
 
      {%endblock%}
