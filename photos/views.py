@@ -15,7 +15,7 @@ def news_today(request):
     images= Image.todays_news()
     current_user=request.user
     myprof=Profile.objects.filter(id=current_user.id).first()
-    # return render(request, 'all-news/today-news.html', {"date": date,"news":news})
+    
     if request.method == 'POST':
         form = NewsLetterForm(request.POST)
         if form.is_valid():
@@ -26,7 +26,7 @@ def news_today(request):
             recipient.save()
             send_welcome_email(name,email)
             HttpResponseRedirect('news_today')
-# After validating a form instance the values of the form are saved inside cleaned_data property which is a dictionary
+
     else:
         form = NewsLetterForm()
     return render(request, 'home.html', {"date": date,"images":images,"myprof":myprof,"letterForm":form})
