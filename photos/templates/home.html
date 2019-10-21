@@ -17,17 +17,18 @@
          
           
               <img src="{{user.profile.profile_picture.url}}" class="img-circle"  width="32" height="32">
-              <p style="margin-left:520px;margin-top:-50px;font-size:30px;">...</p>
+              
               <strong style="color: #333333;cursor: pointer">{{user.profile.Name}}</strong>
-            
+              <p style="margin-left:520px;margin-top:-50px;font-size:30px;">...</p>
          
         <img src="{{image.image.url}} " style="margin-bottom:20px;height:500px"class="img-responsive"  with="200" alt="Image">
         <!-- alt="{{image.user.user.username}}" width="30" height="30"> -->
     <p>  <strong style="color: #333333;cursor: pointer">{{user.profile.Name}}</strong>  {{image.caption}}</p>
     <a href="{% url 'like' id=image.id%}"><i class="fa fa-heart-o" style="color: black;size: 150px;"></i></a>
     <a href="{% url 'comment' image.id %}"><i class="fa fa-comment-o" style="color: black;size: 150px;"></i></a> 
-    <a  class="btn" href="{% url 'like' id=image.id%}" >
-        <p >{{image.likes}} Likes <i class="fa fa-heart-o" ></i></p>
+    <br>
+    <!-- <a  class="btn" href="{% url 'like' id=image.id%}" > -->
+        <p >{{image.likes}} Likes</p>
     
     </a>
   {% for com in image.comment_set.all %}

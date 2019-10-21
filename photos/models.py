@@ -13,21 +13,18 @@ class Image(models.Model):
     image = models.ImageField(upload_to = 'images/')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='images')
     likes=models.IntegerField(default=0)
+
     @classmethod
     def todays_news(cls):
         today = dt.date.today()
         images = cls.objects.filter(pub_date__date = today)
         return images
+
     @classmethod
     def days_news(cls,date):
         news = cls.objects.filter(pub_date__date = date)
         return news
-    
-    @classmethod
-    def search_by_name(self,searched_image):
-        
-        searched_images = self.objects.filter(name__icontains=searched_image)
-        return searched_images
+  
 
     @classmethod
     def get_comments(self):
@@ -42,61 +39,18 @@ class Profile(models.Model):
         upload_to='users/', default='users/user.png')
     bio = models.TextField(default="Welcome !")
 
-    @receiver(post_save, sender=User)
-    def create_user_profile(sender, instance, created, **kwargs):
-        if created:
-            Profile.objects.create(user=instance)
+    
 
-    @receiver(post_save, sender=User)
-    def save_user_profile(sender, instance, **kwargs):
-        instance.profile.save()
-
-    @classmethod
-    def find_profile(cls, name):
-        return cls.objects.filter(user__username__icontains=name).all()
-
-    def togglefollow(self, profile):
-        if self.following.filter(followee=profile).count() == 0:
-            Follows(followee=profile, follower=self).save()
-            return True
-        else:
-            self.following.filter(followee=profile).delete()
-            return False
-
-    def like(self, photo):
-        if self.mylikes.filter(photo=photo).count() == 0:
-            Likes(photo=photo, user=self).save()
-
-    def save_image(self, photo):
-        if self.saves.filter(photo=photo).count() == 0:
-            Saves(photo=photo, user=self).save()
-        else:
-            self.saves.filter(photo=photo).delete()
-
-    def unlike(self, photo):
-        self.mylikes.filter(photo=photo).all().delete()
-
-    def comment(self, photo, text):
-        Comment(text=text, photo=photo, user=self).save()
-
-    def post(self, form):
-        image = form.save(commit=False)
-        image.user = self
-        image.save()
-
-    @property
-    def follows(self):
-        return [follow.followee for follow in self.following.all()] 
-    def __str__(self):
-        return self.user.username
     @classmethod
     def search(cls,username):
         profiles=cls.objects.filter(user__username__icontains=username)
         return profiles
+
 class Comment(models.Model):
     comment= models.TextField()
     photo = models.ForeignKey(Image, on_delete=models.CASCADE,null=True)
     posted_by=models.ForeignKey(Profile,on_delete=models.CASCADE,null=True)
+
     def __str__(self):
         return self.posted_by
     
