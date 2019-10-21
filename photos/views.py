@@ -13,6 +13,8 @@ from .forms import *
 def news_today(request):
     date = dt.date.today()
     images= Image.todays_news()
+    current_user=request.user
+    myprof=Profile.objects.filter(id=current_user.id).first()
     # return render(request, 'all-news/today-news.html', {"date": date,"news":news})
     if request.method == 'POST':
         form = NewsLetterForm(request.POST)
@@ -27,7 +29,7 @@ def news_today(request):
 # After validating a form instance the values of the form are saved inside cleaned_data property which is a dictionary
     else:
         form = NewsLetterForm()
-    return render(request, 'home.html', {"date": date,"images":images,"letterForm":form})
+    return render(request, 'home.html', {"date": date,"images":images,"myprof":myprof,"letterForm":form})
 
 
 @login_required(login_url='/accounts/login/')       
@@ -55,13 +57,14 @@ def new_article(request):
 @login_required(login_url='/accounts/login/')
 def mine(request,username=None):
     current_user=request.user
-    images=Image.objects.filter(user=current_user)
+    pic_images=Image.objects.filter(user=current_user)
+    # profile=Profile.objects.filter(user=current_user).first()
     if not username:
       username=request.user.username
       images = Image.objects.filter(name=username)
       user_object = request.user
   
-    return render(request, 'myprofile.html', locals(),{"images":images})
+    return render(request, 'myprofile.html', locals(),{"pic_images":pic_images})
 @login_required(login_url='/accounts/login/')
 def edit(request):
     if request.method == 'POST':

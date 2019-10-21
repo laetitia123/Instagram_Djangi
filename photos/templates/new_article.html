@@ -8,7 +8,7 @@
 
   <title>New Article</title>
   {{form.media}}
-kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+
 {% block styles %} {% bootstrap_css %}
   <link rel="stylesheet" href="{% static 'css/news.css' %}"> {% endblock %}
 
@@ -18,7 +18,7 @@ kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
 
   <form  action="{%url 'new-article'%}" method="post" enctype="multipart/form-data">
     {%csrf_token%}
-
+                  
     {% bootstrap_form form%}
     <input type="submit" class="btn btn-success btn-lg" value="Post">
   </form>

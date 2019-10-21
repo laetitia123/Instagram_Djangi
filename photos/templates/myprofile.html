@@ -20,7 +20,7 @@
             </div>
             </div>
 <div class="row">
-    <!-- <div class="col-md-2"></div> -->
+   
     <div class="col-md-4">     
   <div style="margin-bottom: 11px;">
     <img src="{{user_object.profile.profile_picture.url}}" stye="padding-left:100px"class="img-circle"  width="352" height="352"
@@ -34,21 +34,18 @@
         <div><span>{{ user_object.profile.bio }}</span></div>
     </div>
 </div>
-</div>  <!-- {%for user in images %}
-    <img src="{{user.image.url}} " style="margin-bottom:20px;"class="img-responsive"  with="200" alt="Image">
-   {% endfor%}
-</div> -->
+</div> 
+</div>
+<hr>
 
-{% if images %}
-{% for user in images %}
-<div class="col-md-4">
-    <!-- <a href="{% url 'new-article' image.id %}"> -->
-    <img src="{{user.image.url }}" alt="{{ image.image_name }} image" id="profile-images">
+
+
+        {% for user_object in pic_images %}
+  
+    <img src="{{user_object.image.url}}" style="height:300px;">
 </a>
-</div>
+
 {% endfor %}
-{% else %}
-<h2 class="text-center">This user has not uploaded any images yet!!</h2>
-{% endif %}
 </div>
+
 {% endblock %}
