@@ -9,8 +9,8 @@ This is Instagram application.create using Django Python Flamework
 >BDD
 
   * A user will be able to see to sign in and sign up
-  * A user, will be able   to view details by clicking on photo
-  * A user,  will be able to copy th link of a photo if she want
+  * A user, will be able  to see posts post by users
+  * A user,  will be able to comment on a post
   
 ## Setup/Installation Requirements
      Django==1.11
