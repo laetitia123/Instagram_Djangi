@@ -51,7 +51,7 @@ def new_article(request):
         return redirect(news_today)
 
     else:
-        form = NewArticleForm()
+        form = uploadimageForm()
     return render(request, 'new_article.html', {"form": form})
 
 @login_required(login_url='/accounts/login/')

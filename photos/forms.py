@@ -38,7 +38,7 @@ class NewArticleForm(forms.ModelForm):
         widgets = {
             'tags': forms.CheckboxSelectMultiple(),
         }
-class NewArticleForms(forms.ModelForm):
+class uploadimageForm(forms.ModelForm):
     class Meta:
         model = Image
         exclude = ['editor', 'pub_date']
