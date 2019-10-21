@@ -7,30 +7,37 @@
 <div class="container">
     
 
-  {% for news_item in images %}
+  {% for image in images %}
   <div class="row">
   
     <div class="col-sm-3"></div>
   
-   
-      <div class="col-sm-6">
-        <img src="{{news_item.image.url}} " style="margin-bottom:20px;"class="img-responsive"  with="200" alt="Image">
+  
+      <div class="col-sm-6" style="border:1px solid whitesmoke;padding-top:20px;" >
+         
+          
+              <img src="{{user.profile.profile_picture.url}}" class="img-circle"  width="32" height="32">
+              <strong style="color: #333333;cursor: pointer">{{user.profile.Name}}</strong>
+            </a> 
+         
+        <img src="{{image.image.url}} " style="margin-bottom:20px;height:500px"class="img-responsive"  with="200" alt="Image">
         <!-- alt="{{image.user.user.username}}" width="30" height="30"> -->
-      </div>
-      <div class="card-title">
-          <img src="{{news_item.user.image.url}}" class="rounded-circle border"
-              alt="{{news_item.user.user.username}}" width="30" height="30">
-        
-              <strong style="color: #333333;cursor: pointer">{{news_item.user.user.username}}</strong>
-          </a>
-      </div>
+    <p>caption:{{image.caption}}</p>
+  </div>
     </div>
 
-  {% endfor %}
+
+ 
+
+                {% for com in image.comment_set.all %}
+                <p>comment:{{com.comment}}</p>
+                {% endfor %}
+              
+                       <a href="{% url 'comment' image.id %}">comment</a> 
 
 </div>
 
-
+{% endfor %}
 
 
 

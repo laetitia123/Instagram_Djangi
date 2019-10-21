@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -15,16 +15,16 @@
           <!-- Adding a search form  -->
           <div class="col-sm-4 col-md-4 navbar-right">
     
-            <form class="navbar-form" role="search" action="{% url 'search_results' %}">
-    
-              <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search Article" name="article">
-                <div class="input-group-btn">
-                  <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-                </div>
-              </div>
-    
-            </form>
+              <form class="navbar-form" role="search" action="{% url 'search_results' %}" >
+
+                  <div class="input-group">
+                    <input type="text" class="form-control mr-sm-4" placeholder="Search User" name="username">
+                    <div class="input-group-btn">
+                      <button class="btn btn-outline-info my-2 my-sm-0" type="submit"  style="color: black;"><i class="fa fa-search"></i></button>
+                    </div>
+                  </div>
+          
+                </form>
           </div>
           <!-- search form end -->
         </div>
@@ -32,31 +32,28 @@
     <div class="col-sm-6 col-md-6">
             {% if user.is_authenticated %}
             <ul>
-              <!-- <li class="dropdown">
-                <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button" aria-expanded="false">Account
-                          <span class="caret"></span>
+               <li class="dropdown" style="text-decoration:none">
+                <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button" aria-expanded="false">
+                  <i class="fa fa-user" style="font-size:40px;color:lightblue;text-shadow:2px 2px 4px #000000;"></i>        
+                  <span class="caret"></span>
                       </a>
                 <ul class="dropdown-menu" role="menu">
                   <li>
-                    <a href="{%url 'newsToday'%}">Home</a>
-                  </li>
-                  <li> -->
+                    <a href="{%url 'mine'%}">Profile</a>
+                  </li> 
+                  <li> 
                     <a href="{%url 'new-article'%}">Upload </a>
                   </li>
-                  <!-- <li>
+                  <li>
                     <a href="/accounts/password/change">Change Password</a>
                   </li>
                   <li>
                     <a href="/logout">Logout</a>
-                  </li> -->
+                  </li>
                 </ul>
               </li>
             </ul>
-            {% else %}
-            <li>
-              <a class='btn btn-default' href="accounts/login">Login</a>
-            </li>
-
+           
             {% endif %}
           </div>
       </nav>

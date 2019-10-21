@@ -7,12 +7,9 @@ from .models import *
 from .email import send_welcome_email
 from django.contrib.auth.decorators import login_required
 from .forms import *
-# Create your views here.
-# Create your views here.
-# @login_required(login_url='/accounts/login/') 
-def profile(request):
-    profile = Article.todays_news()
-    return render(request, 'profile.html', {"profile":profile})
+
+
+@login_required(login_url='/accounts/login/') 
 def news_today(request):
     date = dt.date.today()
     images= Image.todays_news()
@@ -32,18 +29,7 @@ def news_today(request):
         form = NewsLetterForm()
     return render(request, 'home.html', {"date": date,"images":images,"letterForm":form})
 
-def search_results(request):
 
-    if 'article' in request.GET and request.GET["article"]:
-        search_term = request.GET.get("article")
-        searched_articles = Article.search_by_title(search_term)
-        # message =f"{ search_term }"
-
-        return render(request, 'all-news/search.html',{"message":message,"articles": searched_articles})
-
-    else:
-        message = "You haven't searched for any term"
-        return render(request, 'all-news/search.html',{"message":message})
 @login_required(login_url='/accounts/login/')       
 def article(request,article_id):
     try:
@@ -68,12 +54,14 @@ def new_article(request):
 
 @login_required(login_url='/accounts/login/')
 def mine(request,username=None):
+    current_user=request.user
+    images=Image.objects.filter(user=current_user)
     if not username:
       username=request.user.username
       images = Image.objects.filter(name=username)
       user_object = request.user
   
-    return render(request, 'myprofile.html', locals())
+    return render(request, 'myprofile.html', locals(),{"images":images})
 @login_required(login_url='/accounts/login/')
 def edit(request):
     if request.method == 'POST':
@@ -91,3 +79,53 @@ def edit(request):
     else:
         new_profile = ProfileForm(instance=request.user.profile)
     return render(request, 'edit.html', locals())
+    
+@login_required(login_url='/accounts/login/')
+def user(request, user_id):
+    user_object = get_object_or_404(User, pk=user_id)
+    if request.user == user_object:
+        return redirect('myaccount')
+    isfollowing = user_object.profile not in request.user.profile.follows
+    user_images = user_object.profile.posts.all()
+    user_liked = [like.photo for like in user_object.profile.mylikes.all()]
+    return render(request, 'profile.html', locals())
+
+@login_required(login_url='/accounts/login/')
+def find(request, name):
+    results = Profile.find_profile(name)
+    return render(request, 'searchresults.html', locals())
+
+@login_required(login_url='/accounts/login/')
+def add_comment(request, image_id):
+    current_user=request.user
+    image_item=Image.objects.filter(id=image_id).first()
+    prof=Profile.objects.filter(user=current_user.id).first()
+
+  
+    if request.method == 'POST':
+        form = CommentForm(request.POST,request.FILES)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.user = request.user.profile
+            comment.post_by=prof
+            comment.photo = image_item
+        
+            comment.save()
+            return redirect("newsToday")
+    else:
+        form=CommentForm()
+    return render(request,'comment.html',{"form":form,"image_id":image_id})
+
+
+def search_results(request):
+
+    if 'username' in request.GET and request.GET["username"]:
+        search_term = request.GET.get("username")
+        searched_users = Profile.search(search_term)
+        message = f"{search_term}"
+
+        return render(request, 'search.html',{"message":message,"users": searched_users})
+
+    else:
+        message = "You haven't searched for any term"
+        return render(request, 'search.html',{"message":message})

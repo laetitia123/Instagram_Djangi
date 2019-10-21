@@ -31,15 +31,11 @@ class ProfileForm(forms.ModelForm):
         fields = ('Name', 'profile_picture', 'bio')
 
 
-# class CommentForm(forms.ModelForm):
-#     def __init__(self, *args, **kwargs):
-#         super().__init__(*args, **kwargs)
-#         self.fields['text'].widget = forms.TextInput()
-#         self.fields['text'].widget.attrs['placeholder'] = 'Add a comment...'
-
-#     class Meta:
-#         model = Comment
-#         fields = ('text',)
+class CommentForm(forms.ModelForm):
+  
+    class Meta:
+        model = Comment
+        fields = ('comment',)
 
 class NewsLetterForm(forms.Form):
     your_name = forms.CharField(label='First Name',max_length=30)

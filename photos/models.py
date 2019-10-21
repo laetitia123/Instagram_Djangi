@@ -22,10 +22,17 @@ class Image(models.Model):
     def days_news(cls,date):
         news = cls.objects.filter(pub_date__date = date)
         return news
+    
     @classmethod
-    def search_by_title(cls,search_term):
-        news = cls.objects.filter(title__icontains=search_term)
-        return news
+    def search_by_name(self,searched_image):
+        
+        searched_images = self.objects.filter(name__icontains=searched_image)
+        return searched_images
+
+    @classmethod
+    def get_comments(self):
+        images=cls.objects.all().prefetch_related("comment_set")
+        return self.comments.all()
 
 class Profile(models.Model):
     user = models.OneToOneField(
@@ -82,3 +89,18 @@ class Profile(models.Model):
         return [follow.followee for follow in self.following.all()] 
     def __str__(self):
         return self.user.username
+    @classmethod
+    def search(cls,username):
+        profiles=cls.objects.filter(user__username__icontains=username)
+        return profiles
+class Comment(models.Model):
+    comment= models.TextField()
+    photo = models.ForeignKey(Image, on_delete=models.CASCADE,null=True)
+    posted_by=models.ForeignKey(Profile,on_delete=models.CASCADE,null=True)
+    def __str__(self):
+        return self.posted_by
+    
+
+    def get_comment(self,id):
+        comments=Comment.objects.filter(image_id=id)
+        return comments
