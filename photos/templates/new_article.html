@@ -13,21 +13,6 @@
 {% block styles %} {% bootstrap_css %}
   <link rel="stylesheet" href="{% static 'css/news.css' %}"> {% endblock %}
 
-</head>
-
-<body>
-
-  <div class="container">
-    <div class="col-sm-2"></div>
-    <div class="col-sm-6">
-  <form  action="{%url 'new-article'%}" method="post" enctype="multipart/form-data">
-    {%csrf_token%}
-                  
-    {% bootstrap_form form%}
-    <input type="submit" class="btn btn-success btn-lg" value="Post">
-  </form>
-
-   {% block scripts %}
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   {% bootstrap_javascript %} {% endblock %}
 </div>
