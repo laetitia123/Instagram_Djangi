@@ -40,11 +40,11 @@ class Profiletest(TestCase):
             tmp.save()
             self.tempprofiles.append(tmp)
 
-    # def test_follow(self):
-    #     follower = Profile()
-    #     follower.save()
-    #     for i in self.tempprofiles:
-    #         follower.follow(i)
-    #         self.assertEquals(follower.following.count(), self.numusers)
-    #     for u in self.tempprofiles:
-    #         self.assertEquals(u.followers.count(), 1)
+    def test_follow(self):
+        follower = Profile()
+        follower.save()
+        for i in self.tempprofiles:
+            follower.follow(i)
+            self.assertEquals(follower.following.count(), self.numusers)
+        for u in self.tempprofiles:
+            self.assertEquals(u.followers.count(), 1)
