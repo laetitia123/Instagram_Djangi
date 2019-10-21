@@ -14,6 +14,21 @@ class Image(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='images')
     likes=models.IntegerField(default=0)
 
+
+    def save_image(self):
+        
+        self.save()
+
+    
+    def delete_image(self):
+       
+        self.delete()
+
+    
+    def update_caption(self):
+       
+        pass
+
     @classmethod
     def todays_news(cls):
         today = dt.date.today()

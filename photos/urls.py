@@ -18,7 +18,7 @@ urlpatterns=[
     url(r'search/(?P<name>.+)', views.find, name='save'),
     url(r'user/(?P<user_id>\d+)', views.user, name='aboutuser'),
     url(r'^search/',  views.search_results,name='search_results'),
-    url(r'^likes/(?P<id>\d+)',views.likes,name="like"),
+    url(r'^likes/(?P<id>\d+)',views.like_it,name="like"),
     
 ]
 if settings.DEBUG:
