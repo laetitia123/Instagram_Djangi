@@ -35,7 +35,7 @@ class Profiletest(TestCase):
 
     def setUp(self):
         self.tempprofiles = []
-        for i in range(self.numusers):
+        for i in range(self.users):
             tmp = Profile()
             tmp.save()
             self.tempprofiles.append(tmp)
@@ -45,6 +45,6 @@ class Profiletest(TestCase):
         follower.save()
         for i in self.tempprofiles:
             follower.follow(i)
-            self.assertEquals(follower.following.count(), self.numusers)
+            self.assertEquals(follower.following.count(), self.users)
         for u in self.tempprofiles:
             self.assertEquals(u.followers.count(), 1)
