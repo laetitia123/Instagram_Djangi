@@ -11,6 +11,7 @@ This is Instagram application.create using Django Python Flamework
   * A user will be able to see to sign in and sign up
   * A user, will be able  to see posts post by users
   * A user,  will be able to comment on a post
+  * A user,  will be able to like on a post
   
 ## Setup/Installation Requirements
      Django==1.11
