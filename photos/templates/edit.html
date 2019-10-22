@@ -1,16 +1,40 @@
-{%extends "base.html" %}
-{% load bootstrap3 %}
-{% load static %}
-{% block content %}
 
-<div class="loginform">
-    <form action="{%  url 'edit' %}" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {% bootstrap_form new_profile %}
-        <div class="form-group" style="text-align: center">
-            <input type="submit" class="btn btn-primary btn-sm" value="Update">
-        </div>
-    </form>
+
+{%extends "registration/base.html"%} {% load bootstrap3 %} {%load static%} {% load staticfiles %} {% block content %}
+
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Edit Your Profile</title>
+  {{form.media}}
+
+{% block styles %} {% bootstrap_css %}
+  <link rel="stylesheet" href="{% static 'css/news.css' %}"> {% endblock %}
+
+</head>
+
+<body>
+<div class="container" >
+
+     <div class="row">
+<div class="col-sm-3"></div>
+<div class="col-sm-6">
+
+  <form  action="{%url 'edit'%}" method="post" enctype="multipart/form-data">
+    {%csrf_token%}
+
+    {% bootstrap_form form%}
+    <input id="id_myfield" type="submit" class="btn btn-success btn-lg" value="Post">
+  </form>
 </div>
+
+     </div>
 </div>
+
+
+
+
+</body>
 {% endblock %}

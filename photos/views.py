@@ -3,7 +3,6 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse, Http404,HttpResponseRedirect
 import datetime as dt
 from .models import *
-# from .forms import NewsLetterForm
 from .email import send_welcome_email
 from django.contrib.auth.decorators import login_required
 from .forms import *
@@ -17,7 +16,7 @@ def news_today(request):
     myprof=Profile.objects.filter(id=current_user.id).first()
     
     if request.method == 'POST':
-        form = NewsLetterForm(request.POST)
+        form = uploadimageForm(request.POST)
         if form.is_valid():
             print('valid')
             name = form.cleaned_data['your_name']
@@ -28,7 +27,7 @@ def news_today(request):
             HttpResponseRedirect('news_today')
 
     else:
-        form = NewsLetterForm()
+        form = uploadimageForm()
     return render(request, 'home.html', {"date": date,"images":images,"myprof":myprof,"letterForm":form})
 
 
@@ -43,7 +42,7 @@ def article(request,article_id):
 def new_article(request):
     current_user = request.user
     if request.method == 'POST':
-        form = NewArticleForm(request.POST, request.FILES)
+        form = uploadimageForm(request.POST, request.FILES)
         if form.is_valid():
             article = form.save(commit=False)
             article.editor = current_user
@@ -65,32 +64,48 @@ def mine(request,username=None):
       user_object = request.user
   
     return render(request, 'myprofile.html', locals(),{"pic_images":pic_images})
+# @login_required(login_url='/accounts/login/')
+# def edit(request):
+#     current_user = request.user
+#     if request.method == 'POST':
+#         print(request.FILES)
+#         new_profile = ProfileForm(request.POST,request.FILES,
+#             instance=request.user
+#         )
+#         if new_profile.is_valid():
+#             # new_profile.user= current_user
+#             # print(new_profile.user)
+#             new_profile.save()
+#             print(new_profile.fields)
+#             # print(new_profile.fields.profile_picture)
+#             return redirect('myaccount')
+#     else:
+#         new_profile = ProfileForm()
+#     return render(request, 'edit.html', {"new_profile":new_profile})
+    
 @login_required(login_url='/accounts/login/')
 def edit(request):
-    if request.method == 'POST':
-        print(request.FILES)
-        new_profile = ProfileForm(
-            request.POST,
-            request.FILES,
-            instance=request.user.profile
-        )
-        if new_profile.is_valid():
-            new_profile.save()
-            print(new_profile.fields)
-        
-            return redirect('myaccount')
+    current_user=request.user
+    if request.method=='POST':
+        form=ProfileForm(request.POST,request.FILES)
+        if form.is_valid():
+            image=form.save(commit=False)
+            image.user=current_user
+            image.save()
+        return redirect('newsToday')
     else:
-        new_profile = ProfileForm(instance=request.user.profile)
-    return render(request, 'edit.html', locals())
-    
+        form=ProfileForm()
+    return render(request,'edit.html',{"form":form})
+
+
 @login_required(login_url='/accounts/login/')
 def user(request, user_id):
     user_object = get_object_or_404(User, pk=user_id)
     if request.user == user_object:
         return redirect('myaccount')
-    isfollowing = user_object.profile not in request.user.profile.follows
+    following = user_object.profile not in request.user.profile.follows
     user_images = user_object.profile.posts.all()
-    user_liked = [like.photo for like in user_object.profile.mylikes.all()]
+   
     return render(request, 'profile.html', locals())
 
 @login_required(login_url='/accounts/login/')
@@ -125,7 +140,7 @@ def search_results(request):
     if 'username' in request.GET and request.GET["username"]:
         search_term = request.GET.get("username")
         searched_users = Profile.search(search_term)
-        message = f"{search_term}"
+        # message = f"{search_term}"
 
         return render(request, 'search.html',{"message":message,"users": searched_users})
 
