@@ -44,10 +44,9 @@ This is Instagram application.create using Django Python Flamework
     *Psql
     * html
     * css 
-## link to my Github account
-https://gallerylaety.herokuapp.com
+## Deployment link (site link)
 
-
+https://instagramlaety.herokuapp.com/
 
 ## Support and contact details
 Any contribution or support please contact me on my email:uwizelaetitia@gmail.com
