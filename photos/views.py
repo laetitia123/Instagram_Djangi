@@ -11,7 +11,7 @@ from .forms import *
 @login_required(login_url='/accounts/login/') 
 def news_today(request):
     date = dt.date.today()
-    images= Image.todays_news()
+    images= Image.objects.all()
     current_user=request.user
     myprof=Profile.objects.filter(id=current_user.id).first()
     

@@ -27,8 +27,8 @@ if config('MODE')=="dev":
            'NAME': config('DB_NAME'),
            'USER': config('DB_USER'),
            'PASSWORD': config('DB_PASSWORD'),
-           'HOST': config('DB_HOST'),
-           'PORT': '',
+        #    'HOST': config('DB_HOST'),
+        #    'PORT': '',
        }
        
    }
@@ -63,9 +63,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECRET_KEY = 'bj^672htnd4k1x&+692ta=r2e7#p$wjr*ma-#5rq1-(w_d_l^o'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
 TIME_ZONE = 'Africa/Kigali'
 
 # Application definition
@@ -117,14 +117,14 @@ WSGI_APPLICATION = 'instagram.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'instagram',
-        'USER': 'wecode',
-    'PASSWORD':'cool',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'instagram',
+#         'USER': 'wecode',
+#     'PASSWORD':'cool',
+#     }
+# }
 
 
 
